@@ -5,6 +5,16 @@ class Alunos {
   late String documentAluno;
   late List<Notas>? _notas;
   late String _telefone;
+  late String _genero;
+  late bool _possuiDeficiencia;
+
+  bool get possuiDeficiencia => _possuiDeficiencia;
+
+  set possuiDeficiencia(bool value) => _possuiDeficiencia = value;
+
+  String get getGenero => _genero;
+
+  set setGenero(String genero) => _genero = genero;
 
   String get telefone => _telefone;
 
@@ -24,7 +34,15 @@ class Alunos {
   }
   Alunos.semdados();
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMapCadastroAluno() {
+    return {
+      'nome': _nomeAluno,
+      'telefone': _telefone,
+      'genero': _genero,
+      'possui deficiencia': possuiDeficiencia
+    };
+  }
+  /*Map<String, dynamic> toMap() {
     Map<String, dynamic> notasPorTrimestre = {};
 
     for (var nota in notas!) {
@@ -34,5 +52,5 @@ class Alunos {
       };
     }
     return notasPorTrimestre;
-  }
+  }*/
 }

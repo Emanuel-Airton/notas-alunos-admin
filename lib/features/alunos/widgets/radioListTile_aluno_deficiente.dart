@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-enum CaracterUnico { sim, nao }
+import 'package:notas_alunos_windows/features/alunos/models/model_aluno.dart';
+import 'package:notas_alunos_windows/features/alunos/provider/alunos_provider.dart';
+import 'package:provider/provider.dart';
 
 class RadiolisttileAlunoDeficiente extends StatefulWidget {
   const RadiolisttileAlunoDeficiente({super.key});
@@ -12,9 +13,11 @@ class RadiolisttileAlunoDeficiente extends StatefulWidget {
 
 class _RadiolisttileAlunoDeficienteState
     extends State<RadiolisttileAlunoDeficiente> {
-  CaracterUnico caracterUnico = CaracterUnico.nao;
+  bool valor = false;
+  Alunos alunos = Alunos.semdados();
   @override
   Widget build(BuildContext context) {
+    final alunosProvider = Provider.of<AlunosProvider>(context);
     return Container(
       height: MediaQuery.of(context).size.height * 0.12,
       width: MediaQuery.sizeOf(context).width * 0.10,
@@ -27,11 +30,12 @@ class _RadiolisttileAlunoDeficienteState
           ListTile(
             title: Text('não'),
             leading: Radio(
-              value: CaracterUnico.nao,
-              groupValue: caracterUnico,
+              value: false,
+              groupValue: valor,
               onChanged: (value) {
                 setState(() {
-                  caracterUnico = value!;
+                  valor = value!;
+                  alunosProvider.setAlunoPossuiDeficiencia(valor);
                 });
               },
             ),
@@ -39,11 +43,13 @@ class _RadiolisttileAlunoDeficienteState
           ListTile(
             title: Text('sim'),
             leading: Radio(
-              value: CaracterUnico.sim,
-              groupValue: caracterUnico,
+              value: true,
+              groupValue: valor,
               onChanged: (value) {
                 setState(() {
-                  caracterUnico = value!;
+                  valor = value!;
+
+                  alunosProvider.setAlunoPossuiDeficiencia(valor);
                 });
               },
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:notas_alunos_windows/features/alunos/provider/alunos_provider.dart';
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/firebase_options.dart';
 import 'package:notas_alunos_windows/homePage.dart';
@@ -12,6 +13,7 @@ void main() async {
   );
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: ((_) => TurmasProvider())),
+    ChangeNotifierProvider(create: ((_) => AlunosProvider()))
   ], child: MyApp()));
 }
 

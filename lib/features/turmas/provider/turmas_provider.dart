@@ -3,7 +3,6 @@ import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
 
 class TurmasProvider extends ChangeNotifier {
   Turmas turmas = Turmas();
-  Map _alunos = {};
   Map<String, dynamic> _turmaData = {"quantidade": 0, "alunos": []};
   //late Map<String, dynamic> _turmaData;
 
@@ -23,9 +22,6 @@ class TurmasProvider extends ChangeNotifier {
 
   set turmaData(value) => _turmaData = value;
 
-  Map get alunos => _alunos;
-
-  set alunos(Map value) => _alunos = value;
   bool _isloading = false;
 
   get isloading => _isloading;

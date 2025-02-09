@@ -28,7 +28,7 @@ class DatabaseAluno {
           .collection('turmas')
           .doc(nometurma)
           .collection('alunos')
-          .add({'nome': aluno.nomeAluno, 'telefone': aluno.telefone});
+          .add(aluno.toMapCadastroAluno());
     } on FirebaseException catch (e) {
       debugPrint('Erro ao salvar aluno: ${e.message}');
       throw Exception('Falha ao salvar o aluno: ${e.message}');

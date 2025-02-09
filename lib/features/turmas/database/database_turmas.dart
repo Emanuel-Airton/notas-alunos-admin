@@ -63,8 +63,9 @@ class TurmasFirestore {
             documentSnapshot.data() as Map<String, dynamic>;
 
         Map map = {
-          "nome": mapAlunos["nome"],
-          "id": documentSnapshot.id,
+          'nome': mapAlunos["nome"],
+          'telefone': mapAlunos['telefone'],
+          'id': documentSnapshot.id,
         };
         listAlunosTurma.add(map);
       }

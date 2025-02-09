@@ -36,34 +36,23 @@ class TurmasProvider extends ChangeNotifier {
   get pageController => _pageController;
 
   void navigateToPage(int index) {
-    if ((index - _pageController.page!).abs() > 1) {
+    pageAnimation(index);
+    notifyListeners();
+    /* if ((index - _pageController.page!).abs() > 1) {
       _pageController.jumpToPage(index);
     } else {
       pageAnimation(index);
       notifyListeners();
-    }
+    }*/
   }
 
+  //configura a animação da pagina
   void pageAnimation(int index) {
     _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
     );
-  }
-
-  listAlunos(Map mapListAlunos) async {
-    _isloading = true;
-    notifyListeners();
-    try {
-      if (mapListAlunos.isNotEmpty) {
-        alunos = mapListAlunos;
-        _isloading = false;
-        notifyListeners();
-      }
-    } catch (e) {
-      debugPrint('erro :$e');
-    }
   }
 
   //recebe o map contendo as informações da turma como a lista de alunos

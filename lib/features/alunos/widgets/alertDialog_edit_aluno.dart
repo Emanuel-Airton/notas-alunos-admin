@@ -8,22 +8,30 @@ import 'package:notas_alunos_windows/theme/container_theme.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:provider/provider.dart';
 
-class AlertdialogCadAluno extends StatefulWidget {
-  const AlertdialogCadAluno({super.key});
+class AlertdialogEditAluno extends StatefulWidget {
+  final Alunos alunos;
+  const AlertdialogEditAluno({super.key, required this.alunos});
 
   @override
-  State<AlertdialogCadAluno> createState() => _AlertdialogCadAlunoState();
+  State<AlertdialogEditAluno> createState() => _AlertdialogEditAlunoState();
 }
 
-class _AlertdialogCadAlunoState extends State<AlertdialogCadAluno> {
+class _AlertdialogEditAlunoState extends State<AlertdialogEditAluno> {
   final _key = GlobalKey<FormState>();
   TextEditingController controllerNome = TextEditingController();
   TextEditingController controllerTelefone = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    controllerNome.text = widget.alunos.nomeAluno;
+    controllerTelefone.text = widget.alunos.telefone;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Cadastro de aluno',
+      title: Text('Editar informações do aluno',
           style: CustomTextStyle.fontNomeTurmaContainer),
       content: Container(
         decoration: BoxDecoration(
@@ -39,7 +47,7 @@ class _AlertdialogCadAlunoState extends State<AlertdialogCadAluno> {
             children: [
               ContainerTheme.containerInputData(
                   TextFormField(
-                    autofocus: true,
+                    // initialValue: widget.alunos.nomeAluno,
                     controller: controllerNome,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -56,6 +64,7 @@ class _AlertdialogCadAlunoState extends State<AlertdialogCadAluno> {
               SizedBox(height: 15),
               ContainerTheme.containerInputData(
                   TextFormField(
+                    //initialValue: widget.alunos.telefone,
                     controller: controllerTelefone,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -99,29 +108,20 @@ class _AlertdialogCadAlunoState extends State<AlertdialogCadAluno> {
                     backgroundColor: WidgetStatePropertyAll(
                         Theme.of(context).colorScheme.primary)),
                 onPressed: () async {
-                  if (_key.currentState!.validate()) {
-                    try {
-                      DatabaseAluno databaseAluno = DatabaseAluno();
-                      Alunos aluno = Alunos.semdados();
-                      aluno.nomeAluno = controllerNome.text;
-                      aluno.telefone = controllerTelefone.text;
-                      await databaseAluno.salvarNovoAluno(
-                          value.nomeTurma, aluno);
-                      debugPrint('aluno salvo');
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Center(
-                            child: Text('Aluno registrado com sucesso'),
-                          )));
-                    } catch (e) {
-                      debugPrint('mensagem de erro: ${e.toString()}');
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Center(
-                            child: Text(e.toString()),
-                          )));
-                    }
+                  DatabaseAluno databaseAluno = DatabaseAluno();
+                  try {
+                    widget.alunos.nomeAluno = controllerNome.text;
+                    widget.alunos.telefone = controllerTelefone.text;
+                    await databaseAluno.atualizarDadosAluno(
+                        value.nomeTurma, widget.alunos);
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.green,
+                        content: Center(
+                          child: Text('Aluno atualizado com sucesso'),
+                        )));
+                  } catch (e) {
+                    debugPrint(e.toString());
                   }
                 },
                 child: Text(

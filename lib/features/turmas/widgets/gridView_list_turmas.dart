@@ -27,8 +27,18 @@ class GridviewListTurmas extends StatelessWidget {
           child: ContainerTurma(
             // navigateTo: navigateTo(3),
             nomeTurma: nomeTurma,
-            child:
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text(nomeTurma, style: CustomTextStyle.fontNomeTurmaContainer),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.delete, color: Colors.grey)),
+                )
+              ],
+            ),
           ),
         );
       },

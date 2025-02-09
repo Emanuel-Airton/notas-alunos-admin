@@ -21,7 +21,8 @@ class _AlertdialogDeleteAlunoState extends State<AlertdialogDeleteAluno> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Center(
-            child: Text('Deseja excluir esse aluno da turma?',
+            child: Text(
+                'Deseja excluir o(a) aluno(a) ${widget.alunos.nomeAluno} da turma?',
                 style: CustomTextStyle.fontNomeAlunoTurma),
           ),
         ],

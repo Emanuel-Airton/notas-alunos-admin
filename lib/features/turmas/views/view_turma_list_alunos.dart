@@ -58,6 +58,8 @@ class _TurmaListAlunosState extends State<TurmaListAlunos> {
                               Alunos aluno = Alunos.semdados();
                               aluno.nomeAluno =
                                   turmaData['alunos'][index]['nome'] ?? '';
+                              aluno.telefone =
+                                  turmaData['alunos'][index]['telefone'] ?? '';
                               aluno.documentAluno =
                                   turmaData['alunos'][index]['id'] ?? '';
                               return Padding(

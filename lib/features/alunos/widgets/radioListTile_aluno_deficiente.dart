@@ -18,6 +18,11 @@ class _RadiolisttileAlunoDeficienteState
   @override
   Widget build(BuildContext context) {
     final alunosProvider = Provider.of<AlunosProvider>(context);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      alunosProvider.setAlunoPossuiDeficiencia(valor);
+      // Add Your Code here.
+    });
     return Container(
       height: MediaQuery.of(context).size.height * 0.12,
       width: MediaQuery.sizeOf(context).width * 0.10,

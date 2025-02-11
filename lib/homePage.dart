@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
+import 'package:notas_alunos_windows/features/professores/views/view_professor.dart';
 import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
 import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/features/turmas/views/view_add_turma.dart';
 import 'package:notas_alunos_windows/features/turmas/views/view_turma_list_alunos.dart';
 import 'package:notas_alunos_windows/features/turmas/views/view_turmas.dart';
-import 'package:notas_alunos_windows/features/turmas/widgets/futureBuilder_list_tumas.dart';
 import 'package:notas_alunos_windows/sideBar.dart';
 import 'package:provider/provider.dart';
 
@@ -78,8 +79,7 @@ class _HomePageState extends State<HomePage> {
                   child:
                       Text("Página Inicial", style: TextStyle(fontSize: 24))),
               ViewTurmas(list: list),
-              Center(
-                  child: Text("Professores", style: TextStyle(fontSize: 24))),
+              ViewProfessor(),
               TurmaListAlunos(),
               ViewAddTurma(),
             ],

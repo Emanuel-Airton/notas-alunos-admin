@@ -7,6 +7,7 @@ import 'package:notas_alunos_windows/features/alunos/widgets/textFormField_texto
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/theme/container_theme.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
+import 'package:notas_alunos_windows/widgets/buttons/button_salvar.dart';
 import 'package:provider/provider.dart';
 
 class AlertdialogCadAluno extends StatefulWidget {
@@ -71,37 +72,29 @@ class _AlertdialogCadAlunoState extends State<AlertdialogCadAluno> {
               Navigator.pop(context);
             },
             child: Text('cancelar')),
-        ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(
-                    Theme.of(context).colorScheme.primary)),
-            onPressed: () async {
-              if (_key.currentState!.validate()) {
-                try {
-                  alunosProvider.setAlunoNome(controllerNome.text);
-                  alunosProvider.setAlunoTelefone(controllerTelefone.text);
-                  await alunosProvider
-                      .salvarDadosAlunosFirestore(turmasProvider.nomeTurma);
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Center(
-                        child: Text('Aluno registrado com sucesso'),
-                      )));
-                } catch (e) {
-                  debugPrint('mensagem de erro: ${e.toString()}');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Center(
-                        child: Text(e.toString()),
-                      )));
-                }
-              }
-            },
-            child: Text(
-              'salvar',
-              style: TextStyle(color: Colors.white),
-            ))
+        ButtonSalvar(onpressed: () async {
+          if (_key.currentState!.validate()) {
+            try {
+              alunosProvider.setAlunoNome(controllerNome.text);
+              alunosProvider.setAlunoTelefone(controllerTelefone.text);
+              await alunosProvider
+                  .salvarDadosAlunosFirestore(turmasProvider.nomeTurma);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Center(
+                    child: Text('Aluno registrado com sucesso'),
+                  )));
+            } catch (e) {
+              debugPrint('mensagem de erro: ${e.toString()}');
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Center(
+                    child: Text(e.toString()),
+                  )));
+            }
+          }
+        })
       ],
     );
   }

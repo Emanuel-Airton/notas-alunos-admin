@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
+import 'package:notas_alunos_windows/features/professores/provider/provider_professor.dart';
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:provider/provider.dart';
@@ -25,12 +27,18 @@ class _SideBarItemState extends State<SideBarItem> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TurmasProvider>(context);
+    final professorProvider = Provider.of<ProviderProfessor>(context);
+
     return ListTile(
       leading: Icon(widget.icon, color: Colors.white),
       title: Text(widget.title, style: CustomTextStyle.fontSideBarItens),
       // onTap: widget.function,
       onTap: () {
         provider.navigateToPage(widget.indice);
+        if (widget.indice == 2) {
+          DatabaseProfessor databaseProfessor = DatabaseProfessor();
+          databaseProfessor.listarProfessores(professorProvider);
+        }
       },
     );
   }

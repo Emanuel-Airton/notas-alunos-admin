@@ -20,7 +20,7 @@ class GridviewListTurmas extends StatelessWidget {
       shrinkWrap: true,
       itemCount: listTurno.length,
       itemBuilder: (context, index) {
-        String nomeTurma = listTurno[index];
+        String nomeTurma = listTurno[index]['nome'];
 
         return Padding(
           padding: const EdgeInsets.all(15),

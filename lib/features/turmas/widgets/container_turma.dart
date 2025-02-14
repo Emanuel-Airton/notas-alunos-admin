@@ -18,11 +18,11 @@ class ContainerTurma extends StatelessWidget {
   Widget build(BuildContext context) {
     final turmaProvider = Provider.of<TurmasProvider>(context);
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         turmaProvider.setTurmaNome(nomeTurma);
         turmaProvider.navigateToPage(3);
         debugPrint(turmaProvider.nomeTurma);
-        _turmasFirestore.listarAlunosTurmaFirestore(
+        await _turmasFirestore.listarAlunosTurmaFirestore(
             turmaProvider.nomeTurma, turmaProvider);
         // turmaProvider.listAlunos(mapAlunos);
         //debugPrint(provider.alunos.toString());

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:notas_alunos_windows/features/professores/authentication/auth_professor.dart';
 import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
 import 'package:notas_alunos_windows/features/professores/models/model_professor.dart';
 
 class ProviderProfessor extends ChangeNotifier {
   ModelProfessor modelProfessor = ModelProfessor();
   bool isloading = false;
-  late List<Map<String, dynamic>> listaProfessores;
+  List<Map<String, dynamic>> listaProfessores = [];
   DatabaseProfessor databaseProfessor = DatabaseProfessor();
 
   setNomeProfessor(String nome) {
@@ -23,8 +24,18 @@ class ProviderProfessor extends ChangeNotifier {
     notifyListeners();
   }
 
-  salvarProfessorFirestore() async {
+  setSenhaProfessor(String senha) {
+    modelProfessor.senha = senha;
+    notifyListeners();
+  }
+
+  /*salvarProfessorFirestore() async {
     await databaseProfessor.adicionarProfessor(modelProfessor);
+    notifyListeners();
+  }*/
+  salvarAuthProfessor() async {
+    AuthProfessor authProfessor = AuthProfessor();
+    await authProfessor.criarUsuarioProfesor(modelProfessor);
     notifyListeners();
   }
 
@@ -36,10 +47,11 @@ class ProviderProfessor extends ChangeNotifier {
   providerListarProfessores(List<Map<String, dynamic>> listaRecebida) {
     isloading = true;
     notifyListeners();
-    if (listaRecebida.isNotEmpty) {
-      listaProfessores = listaRecebida;
-      isloading = false;
-      notifyListeners();
+    listaProfessores = listaRecebida;
+    isloading = false;
+    for (int i = 0; i < listaProfessores.length; i++) {
+      setIDProfessor(listaProfessores[i]['id']);
     }
+    notifyListeners();
   }
 }

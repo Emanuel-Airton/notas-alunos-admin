@@ -1,8 +1,12 @@
+import 'package:notas_alunos_windows/models/model_disciplina.dart';
+
 class ModelProfessor {
   late String _nomeProfessor;
   late String _emailProfessor;
   late String _idProfessor;
   late String _senha;
+  //late List<Disciplina> disciplina;
+  late List disciplina;
 
   String get senha => _senha;
 

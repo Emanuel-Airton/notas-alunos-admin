@@ -15,25 +15,25 @@ class _ListviewProfesoresState extends State<ListviewProfesores> {
   @override
   Widget build(BuildContext context) {
     final professoresProvider = context.watch<ProviderProfessor>();
-
-    List<Map<String, dynamic>> lista = professoresProvider.listaProfessores;
     return Container(
         padding: EdgeInsets.all(15),
         child: professoresProvider.isloading
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemCount: lista.length,
+            : GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5),
+                itemCount: professoresProvider.listaProfessores.length,
                 itemBuilder: (context, index) {
-                  Map<String, dynamic> mapProfesor = lista[index];
+                  Map<String, dynamic> mapProfesor =
+                      professoresProvider.listaProfessores[index];
                   ModelProfessor modelProfessor = ModelProfessor();
                   modelProfessor.idProfessor = mapProfesor['id'];
                   modelProfessor.nomeProfessor = mapProfesor['nome'];
                   modelProfessor.emailProfessor = mapProfesor['email'];
-
-                  debugPrint(
-                      'id atual: ${professoresProvider.modelProfessor.idProfessor}');
+                  modelProfessor.disciplina = mapProfesor['disciplinas'];
+                  debugPrint('id atual: ${modelProfessor.idProfessor}');
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child:

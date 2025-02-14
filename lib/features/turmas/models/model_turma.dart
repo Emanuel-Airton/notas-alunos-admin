@@ -1,8 +1,8 @@
-class Turmas {
-  late String _nomeTuma;
-  late String _turno;
-  late List<String> _alunos;
-  late int _quantidade;
+/*class Turmas {
+  String _nomeTuma = '';
+  String _turno = '';
+  List<String> _alunos = [];
+  int _quantidade = 0;
 
   get quantidade => _quantidade;
 
@@ -19,4 +19,16 @@ class Turmas {
   get alunos => _alunos;
 
   set alunos(value) => _alunos = value;
+
+  Turmas({required nomeTuma, required turno});
+  Turmas.semdados();
+}*/
+class Turmas {
+  String? nomeTuma;
+  String? turno;
+  List<String>? alunos;
+  int? quantidade;
+
+  Turmas({required nomeTuma, required turno});
+  Turmas.semdados();
 }

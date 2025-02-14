@@ -2,21 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/services/turmas_services.dart';
 
 class TurmasFirestore {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   final String colecaoTurmas = 'turmas';
   final String colecaoAlunos = 'alunos';
 
-  Future<List> listaTurmas() async {
-    List list = [];
+  Future listaTurmas(TurmasProvider turmasProvider) async {
+    TurmasServices turmasServices = TurmasServices();
+    List<Map> list = [];
     QuerySnapshot queryDocumentSnapshot =
         await _firebaseFirestore.collection('turmas').get();
     for (DocumentSnapshot doc in queryDocumentSnapshot.docs) {
       Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
-      list.add(map['nome']);
+      Map mapTurma = {'nome': map['nome'], 'turno': map['turno']};
+      list.add(mapTurma);
     }
-    return list;
+    turmasProvider.listaTurmasFirestore(list);
+    turmasServices.separarTurmasPorTurno(turmasProvider, list);
+    // return list;
   }
 
   salvarTurma(Turmas turma) async {
@@ -46,7 +51,8 @@ class TurmasFirestore {
     return mensagem;
   }
 
-  listarAlunosTurmaFirestore(String turma, TurmasProvider turmasProvider) {
+  listarAlunosTurmaFirestore(
+      String turma, TurmasProvider turmasProvider) async {
     List<Map> listAlunosTurma = [];
     // String documentID = "";
     Map<String, dynamic> mapTurma = {};

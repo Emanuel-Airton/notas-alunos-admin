@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notas_alunos_windows/features/disciplinas/widgets/dropDownButtom_disciplinas.dart';
 import 'package:notas_alunos_windows/features/professores/provider/provider_professor.dart';
 import 'package:notas_alunos_windows/features/professores/widgets/textField_email_professor.dart';
 import 'package:notas_alunos_windows/features/professores/widgets/textField_nome_professor.dart';
@@ -44,19 +45,16 @@ class _AlertdialogCadastroProfessorState
                   TextfieldNomeProfessor(controllerNome: controllerNome),
                   double.maxFinite),
               SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ContainerTheme.containerInputData(
-                      TextfieldEmailProfessor(controllerEmail: controllerEmail),
-                      width * 0.18),
-                  ContainerTheme.containerInputData(
-                      TextfieldSenhaProfessor(
-                          controllerSenha: controllerPassword),
-                      width * 0.18),
-                ],
-              ),
+              ContainerTheme.containerInputData(
+                  TextfieldEmailProfessor(controllerEmail: controllerEmail),
+                  double.maxFinite),
               SizedBox(height: 15),
+              ContainerTheme.containerInputData(
+                  TextfieldSenhaProfessor(controllerSenha: controllerPassword),
+                  double.maxFinite),
+              SizedBox(height: 15),
+              // ContainerTheme.containerInputData(
+              //   DropdownButtonDisciplinas(), double.maxFinite),
             ],
           ),
         ),
@@ -69,7 +67,9 @@ class _AlertdialogCadastroProfessorState
                 try {
                   value.setNomeProfessor(controllerNome.text);
                   value.setEmailProfessor(controllerEmail.text);
-                  value.salvarProfessorFirestore();
+                  value.setSenhaProfessor(controllerPassword.text);
+                  // value.salvarProfessorFirestore();
+                  value.salvarAuthProfessor();
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.green,

@@ -4,8 +4,8 @@ import 'package:notas_alunos_windows/features/turmas/widgets/futureBuilder_list_
 import 'package:provider/provider.dart';
 
 class ViewTurmas extends StatefulWidget {
-  final Future<List> list;
-  const ViewTurmas({super.key, required this.list});
+  // final Future<List> list;
+  const ViewTurmas({super.key});
 
   @override
   State<ViewTurmas> createState() => _ViewTurmasState();
@@ -23,9 +23,7 @@ class _ViewTurmasState extends State<ViewTurmas> {
           },
           label: Text('Adicionar nova turma')),
       appBar: AppBar(),
-      body: FutureListTurma(
-        list: widget.list,
-      ),
+      body: FutureListTurma(),
     );
   }
 }

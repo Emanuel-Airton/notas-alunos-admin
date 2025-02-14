@@ -10,7 +10,7 @@ class ButtonSaveTurma extends StatelessWidget {
   final TurmasFirestore _turmasFirestore = TurmasFirestore();
   ButtonSaveTurma(
       {super.key, required this.formKey, required this.textEditingController});
-  final Turmas _turmas = Turmas();
+  final Turmas _turmas = Turmas.semdados();
   @override
   Widget build(BuildContext context) {
     final turmaProvider = Provider.of<TurmasProvider>(context);

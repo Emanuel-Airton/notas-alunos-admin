@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
 import 'package:notas_alunos_windows/features/professores/views/view_professor.dart';
 import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
 import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
@@ -20,16 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List> list;
-  Turmas turmas = Turmas();
-  TurmasFirestore turmasFirestore = TurmasFirestore();
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-  @override
-  void initState() {
-    super.initState();
-    list = turmasFirestore.listaTurmas();
-    debugPrint('print');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               Center(
                   child:
                       Text("Página Inicial", style: TextStyle(fontSize: 24))),
-              ViewTurmas(list: list),
+              ViewTurmas(),
               ViewProfessor(),
               TurmaListAlunos(),
               ViewAddTurma(),

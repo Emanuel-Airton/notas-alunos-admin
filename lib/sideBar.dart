@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
 import 'package:notas_alunos_windows/features/professores/provider/provider_professor.dart';
+import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
 import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +9,6 @@ import 'package:provider/provider.dart';
 class SideBarItem extends StatefulWidget {
   final IconData icon;
   final String title;
-  //Function()? function;
-  //final bool isSelected;
   final int indice;
   SideBarItem(
       {super.key,
@@ -26,7 +25,7 @@ class SideBarItem extends StatefulWidget {
 class _SideBarItemState extends State<SideBarItem> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TurmasProvider>(context);
+    final turmasProvider = Provider.of<TurmasProvider>(context);
     final professorProvider = Provider.of<ProviderProfessor>(context);
 
     return ListTile(
@@ -34,10 +33,13 @@ class _SideBarItemState extends State<SideBarItem> {
       title: Text(widget.title, style: CustomTextStyle.fontSideBarItens),
       // onTap: widget.function,
       onTap: () {
-        provider.navigateToPage(widget.indice);
+        turmasProvider.navigateToPage(widget.indice);
         if (widget.indice == 2) {
           DatabaseProfessor databaseProfessor = DatabaseProfessor();
           databaseProfessor.listarProfessores(professorProvider);
+        } else if (widget.indice == 1) {
+          TurmasFirestore turmasFirestore = TurmasFirestore();
+          turmasFirestore.listaTurmas(turmasProvider);
         }
       },
     );

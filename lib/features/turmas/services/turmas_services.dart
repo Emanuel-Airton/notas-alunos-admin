@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 
 class TurmasServices {
-  separarTurmasPorTurno(TurmasProvider turmasProvider, List<Map> listaMap) {
+  separarTurmasPorTurno(
+      TurmasProvider turmasProvider, List<ModelTurmas> listaMap) async {
     //  debugPrint('teste: ${listaMap.toString()}');
-    List<Map> listMatutino = [];
-    List<Map> listVespertino = [];
+    List<ModelTurmas> listMatutino = [];
+    List<ModelTurmas> listVespertino = [];
 
     for (int i = 0; i < listaMap.length; i++) {
-      if (listaMap[i].toString().contains('matutino')) {
+      if (listaMap[i].nomeTuma.toString().contains('matutino')) {
         listMatutino.add(listaMap[i]);
       } else {
         listVespertino.add(listaMap[i]);
@@ -20,8 +21,10 @@ class TurmasServices {
     turmasProvider.setTurmasVespertino(listVespertino);
   }
 
-  adicionarCheckBox(TurmasProvider turmasProvider, List<Map> listTurmaMatutino,
-      List<Map> listTurmaVespertino) {
+  adicionarCheckBox(
+      TurmasProvider turmasProvider,
+      List<ModelTurmas> listTurmaMatutino,
+      List<ModelTurmas> listTurmaVespertino) {
     List<bool> listCheckBoxTurmaMatutino = [];
     List<bool> listCheckBoxTurmaVespertino = [];
 

@@ -1,9 +1,9 @@
-import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
 
 class Disciplina {
   late String _nomeDisciplina;
   late String _turno;
-  late List<Turmas> turmas;
+  late List<ModelTurmas> turmas;
 
   get nomeDisciplina => _nomeDisciplina;
 
@@ -13,7 +13,7 @@ class Disciplina {
 
   set turno(value) => _turno = value;
 
-  Map<String, dynamic> toMap(List<Turmas> turmas) {
+  Map<String, dynamic> toMap(List<ModelTurmas> turmas) {
     return {
       "nome": nomeDisciplina,
       "turmas": turmas

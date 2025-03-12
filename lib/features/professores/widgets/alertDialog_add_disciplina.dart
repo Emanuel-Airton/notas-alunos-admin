@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/disciplinas/provider/disciplina_provider.dart';
 import 'package:notas_alunos_windows/features/disciplinas/widgets/dropDownButtom_disciplinas.dart';
 import 'package:notas_alunos_windows/features/professores/models/model_professor.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/features/turmas/widgets/listView_checkBox_list_turmas.dart';
 import 'package:notas_alunos_windows/features/turmas/widgets/listView_checkBox_turmas_vespertino.dart';
 import 'package:notas_alunos_windows/theme/container_theme.dart';
@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 class AlertdialogAddDisciplina extends StatefulWidget {
   final ModelProfessor modelProfessor;
   const AlertdialogAddDisciplina({super.key, required this.modelProfessor});
-
   @override
   State<AlertdialogAddDisciplina> createState() =>
       _AlertdialogAddDisciplinaState();
@@ -24,7 +23,6 @@ class _AlertdialogAddDisciplinaState extends State<AlertdialogAddDisciplina> {
   Widget build(BuildContext context) {
     final disciplinaProvider = Provider.of<DisciplinaProvider>(context);
     final turmasProvider = Provider.of<TurmasProvider>(context);
-
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -64,9 +62,6 @@ class _AlertdialogAddDisciplinaState extends State<AlertdialogAddDisciplina> {
                           color: Colors.white),
                       child: Column(
                         children: [
-                          /*   Text(
-                            'Disciplina selecionada: ${disciplinaProvider.disciplina.nomeDisciplina ?? ''}',
-                          ),*/
                           disciplinaProvider.disciplinaSelecionada
                               ? Row(
                                   children: [

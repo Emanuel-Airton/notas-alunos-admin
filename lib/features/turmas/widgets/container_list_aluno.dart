@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/alunos/models/model_aluno.dart';
 import 'package:notas_alunos_windows/features/alunos/widgets/alertDialog_delete_aluno.dart';
 import 'package:notas_alunos_windows/features/alunos/widgets/alertDialog_edit_aluno.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:provider/provider.dart';
 

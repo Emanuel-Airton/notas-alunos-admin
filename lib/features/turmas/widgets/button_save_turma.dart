@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
-import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/database/turmas_firestore_repository.dart';
+
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:provider/provider.dart';
 
 class ButtonSaveTurma extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController textEditingController;
-  final TurmasFirestore _turmasFirestore = TurmasFirestore();
+  final TurmasFirestoreRepository _turmasFirestore =
+      TurmasFirestoreRepository();
   ButtonSaveTurma(
       {super.key, required this.formKey, required this.textEditingController});
-  final Turmas _turmas = Turmas.semdados();
+  final ModelTurmas _turmas = ModelTurmas.semdados();
   @override
   Widget build(BuildContext context) {
     final turmaProvider = Provider.of<TurmasProvider>(context);

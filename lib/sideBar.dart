@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/professores/database/database_professor.dart';
 import 'package:notas_alunos_windows/features/professores/provider/provider_professor.dart';
-import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/database/turmas_firestore_repository.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/services/turmas_services.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -32,14 +33,21 @@ class _SideBarItemState extends State<SideBarItem> {
       leading: Icon(widget.icon, color: Colors.white),
       title: Text(widget.title, style: CustomTextStyle.fontSideBarItens),
       // onTap: widget.function,
-      onTap: () {
+      onTap: () async {
         turmasProvider.navigateToPage(widget.indice);
         if (widget.indice == 2) {
           DatabaseProfessor databaseProfessor = DatabaseProfessor();
           databaseProfessor.listarProfessores(professorProvider);
         } else if (widget.indice == 1) {
-          TurmasFirestore turmasFirestore = TurmasFirestore();
-          turmasFirestore.listaTurmas(turmasProvider);
+          await turmasProvider.listaTurmasFirestore2();
+
+          TurmasServices turmasServices = TurmasServices();
+          if (turmasProvider.listaTurmas.isNotEmpty) {
+            await turmasServices.separarTurmasPorTurno(
+                turmasProvider, turmasProvider.listaTurmas);
+          }
+
+          // turmasFirestore.listaTurmas();
         }
       },
     );

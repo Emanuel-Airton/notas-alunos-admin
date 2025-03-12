@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable

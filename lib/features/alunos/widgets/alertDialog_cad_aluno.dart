@@ -4,7 +4,7 @@ import 'package:notas_alunos_windows/features/alunos/widgets/dropDownButton_sele
 import 'package:notas_alunos_windows/features/alunos/widgets/radioListTile_aluno_deficiente.dart';
 import 'package:notas_alunos_windows/features/alunos/widgets/textFormField_texto_nome.dart';
 import 'package:notas_alunos_windows/features/alunos/widgets/textFormField_texto_telefone.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/theme/container_theme.dart';
 import 'package:notas_alunos_windows/theme/text_theme.dart';
 import 'package:notas_alunos_windows/widgets/buttons/button_salvar.dart';

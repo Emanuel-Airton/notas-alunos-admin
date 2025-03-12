@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/alunos/models/model_aluno.dart';
 import 'package:notas_alunos_windows/features/alunos/widgets/alertDialog_cad_aluno.dart';
-import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/database/turmas_firestore_repository.dart';
+
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/features/turmas/widgets/container_info_turma.dart';
 import 'package:notas_alunos_windows/features/turmas/widgets/container_list_aluno.dart';
 import 'package:notas_alunos_windows/features/turmas/widgets/pie_chart.dart';
@@ -17,7 +18,8 @@ class TurmaListAlunos extends StatefulWidget {
 }
 
 class _TurmaListAlunosState extends State<TurmaListAlunos> {
-  final TurmasFirestore fireTurmasFirestore = TurmasFirestore();
+  final TurmasFirestoreRepository fireTurmasFirestore =
+      TurmasFirestoreRepository();
 
   @override
   Widget build(BuildContext context) {

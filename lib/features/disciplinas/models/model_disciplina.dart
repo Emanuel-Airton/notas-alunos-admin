@@ -1,13 +1,13 @@
-import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
 
 class ModelDisciplina {
   late String _nomeDisciplina;
-  late List<Turmas> _turmas;
+  late List<ModelTurmas> _turmas;
   late List<Map> listTurmas;
 
-  List<Turmas> get turmas => _turmas;
+  List<ModelTurmas> get turmas => _turmas;
 
-  set turmas(List<Turmas> value) => _turmas = value;
+  set turmas(List<ModelTurmas> value) => _turmas = value;
 
   get nomeDisciplina => _nomeDisciplina;
 

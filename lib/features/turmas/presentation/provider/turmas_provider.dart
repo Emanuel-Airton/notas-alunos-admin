@@ -1,19 +1,25 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/data/database/turmas_firestore_repository.dart';
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
+
+import 'package:notas_alunos_windows/features/turmas/domain/usecases/turmas_firestore_usecase.dart';
 import 'package:notas_alunos_windows/features/turmas/services/turmas_services.dart';
 
 class TurmasProvider extends ChangeNotifier {
-  Turmas turmas = Turmas.semdados();
+  ModelTurmas turmas = ModelTurmas.semdados();
   TurmasServices turmasServices = TurmasServices();
   Map<String, dynamic> _turmaData = {"quantidade": 0, "alunos": []};
-  List<Map> listaTurmas = [];
-  List<Map> turmasMatutino = [];
-  List<Map> turmasVespertino = [];
+  List<ModelTurmas> listaTurmas = [];
+  List<ModelTurmas> turmasMatutino = [];
+  List<ModelTurmas> turmasVespertino = [];
   List<bool> listCheckBoxMatutino = [];
   List<bool> listCheckBoxVespertino = [];
   String get nomeTurma => turmas.nomeTuma!;
   String get turno => turmas.turno!;
+
+  TurmasFirestoreRepository turmasFirestoreRepository =
+      TurmasFirestoreRepository();
+
   setTurmaNome(String nomeTurma) {
     turmas.nomeTuma = nomeTurma;
     notifyListeners();
@@ -69,7 +75,7 @@ class TurmasProvider extends ChangeNotifier {
     }
   }
 
-  listaTurmasFirestore(List<Map> listaTurmasRecebida) {
+  /*listaTurmasFirestore(List<Map<String, String>> listaTurmasRecebida) {
     _isloading = true;
     notifyListeners();
 
@@ -77,14 +83,34 @@ class TurmasProvider extends ChangeNotifier {
     debugPrint(listaTurmas.toString());
     _isloading = false;
     notifyListeners();
+  }*/
+
+  listaTurmasFirestore2() async {
+    TurmasFirestoreUsecase turmasFirestoreUsecase =
+        TurmasFirestoreUsecase(turmasFirestoreRepository);
+    _isloading = true;
+    notifyListeners();
+
+    listaTurmas = await turmasFirestoreUsecase.listTurmas();
+    _isloading = false;
+
+    notifyListeners();
   }
 
-  setListaMatutino(List<Map> list) {
+  deletarTurma(String doc) async {
+    TurmasFirestoreUsecase turmasFirestoreUsecase =
+        TurmasFirestoreUsecase(turmasFirestoreRepository);
+    turmasFirestoreUsecase.deletarTurma(doc);
+    listaTurmasFirestore2();
+    notifyListeners();
+  }
+
+  setListaMatutino(List<ModelTurmas> list) {
     turmasMatutino = list;
     notifyListeners();
   }
 
-  setTurmasVespertino(List<Map> list) {
+  setTurmasVespertino(List<ModelTurmas> list) {
     turmasVespertino = list;
     notifyListeners();
   }

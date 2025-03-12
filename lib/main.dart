@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:notas_alunos_windows/features/alunos/provider/alunos_provider.dart';
 import 'package:notas_alunos_windows/features/disciplinas/provider/disciplina_provider.dart';
 import 'package:notas_alunos_windows/features/professores/provider/provider_professor.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:notas_alunos_windows/firebase_options.dart';
 import 'package:notas_alunos_windows/homePage.dart';
 import 'package:provider/provider.dart';

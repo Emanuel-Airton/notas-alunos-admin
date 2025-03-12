@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notas_alunos_windows/features/disciplinas/provider/disciplina_provider.dart';
-import 'package:notas_alunos_windows/features/turmas/models/model_turma.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/models/model_turma.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:provider/provider.dart';
 
 class ListviewCheckboxTurmasVespertino extends StatefulWidget {
@@ -31,9 +31,9 @@ class _ListviewCheckboxTurmasVespertinoState
                   turmasProvider.listCheckBoxVespertino[index] = value!;
                 });
                 if (turmasProvider.listCheckBoxMatutino[index] == true) {
-                  Turmas t = Turmas.semdados();
-                  t.nomeTuma = turmasProvider.turmasVespertino[index]['nome'];
-                  t.turno = turmasProvider.turmasVespertino[index]['turno'];
+                  ModelTurmas t = ModelTurmas.semdados();
+                  t.nomeTuma = turmasProvider.turmasVespertino[index].nomeTuma;
+                  t.turno = turmasProvider.turmasVespertino[index].turno;
                   Map<String, dynamic> map = {
                     'nome': t.nomeTuma,
                     'turno': t.turno
@@ -42,7 +42,7 @@ class _ListviewCheckboxTurmasVespertinoState
                 }
               }),
           title:
-              Text(turmasProvider.turmasVespertino[index]['nome'].toString()),
+              Text(turmasProvider.turmasVespertino[index].nomeTuma.toString()),
         );
       },
     );

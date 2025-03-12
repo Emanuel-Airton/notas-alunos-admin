@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notas_alunos_windows/features/turmas/database/database_turmas.dart';
-import 'package:notas_alunos_windows/features/turmas/provider/turmas_provider.dart';
+import 'package:notas_alunos_windows/features/turmas/data/database/turmas_firestore_repository.dart';
+import 'package:notas_alunos_windows/features/turmas/presentation/provider/turmas_provider.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +13,8 @@ class ContainerTurma extends StatelessWidget {
     required this.child,
     required this.nomeTurma,
   });
-  final TurmasFirestore _turmasFirestore = TurmasFirestore();
+  final TurmasFirestoreRepository _turmasFirestore =
+      TurmasFirestoreRepository();
   @override
   Widget build(BuildContext context) {
     final turmaProvider = Provider.of<TurmasProvider>(context);
@@ -24,16 +25,6 @@ class ContainerTurma extends StatelessWidget {
         debugPrint(turmaProvider.nomeTurma);
         await _turmasFirestore.listarAlunosTurmaFirestore(
             turmaProvider.nomeTurma, turmaProvider);
-        // turmaProvider.listAlunos(mapAlunos);
-        //debugPrint(provider.alunos.toString());
-
-        // navigateTo(3);
-        /* Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => TurmaListAlunos(
-                      nomeTurma: nomeTurma,
-                    )));*/
       },
       child: Container(
         height: MediaQuery.sizeOf(context).height * 0.1,
